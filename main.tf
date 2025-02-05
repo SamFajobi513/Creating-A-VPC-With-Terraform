@@ -26,6 +26,17 @@ resource "aws_internet_gateway" "igw" {
   depends_on = [aws_vpc.vpc]
 }
 
+resource "aws_egress_only_internet_gateway" "eoigw" {
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name = var.eoigw
+    var  = var.env
+  }
+
+  depends_on = [aws_vpc.vpc]
+}
+
 resource "aws_subnet" "public-subnet" {
   count                   = var.pub-subnet-count
   vpc_id                  = aws_vpc.vpc.id
@@ -72,7 +83,7 @@ resource "aws_route_table" "public-rt" {
 
   route {
     ipv6_cidr_block        = "::/0"
-    egress_only_gateway_id = aws_egress_only_internet_gateway.igw.id
+    egress_only_gateway_id = aws_egress_only_internet_gateway.eoigw.id
   }
 
   tags = {
