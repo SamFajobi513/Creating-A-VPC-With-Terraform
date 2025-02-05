@@ -13,3 +13,15 @@ resource "aws_vpc" "vpc" {
     env  = var.env
   }
 }
+
+resource "aws_internet_gateway" "igw" {
+  vpc_id = aws_vpc.vpc.id
+
+  tags = {
+    Name                                          = var.igw-name
+    env                                           = var.env
+    "kubernetes.io/cluster/${local.cluster-name}" = "owned"
+  }
+
+  depends_on = [aws_vpc.vpc]
+}
