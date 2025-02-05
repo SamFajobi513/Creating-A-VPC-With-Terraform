@@ -8,5 +8,8 @@ variable "pub-subnet-count" {}
 variable "pub-cidr-block" {}
 variable "pub-availability-zone" {}
 variable "pub-sub-name" {}
-variable "pub-availability-zone" {}
-variable "pub-availability-zone" {}
+variable "pri-subnet-count" {}
+variable "pri-availability-zone" {}
+variable "pri-sub-name" {}
+variable "pri-cidr-block" {}
+variable "pri-cidr-block" {}
