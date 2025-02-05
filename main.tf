@@ -95,3 +95,26 @@ resource "aws_route_table" "public-rt" {
   ]
 }
 
+resource "aws_route_table_association" "name" {
+  count          = 3
+  route_table_id = aws_route_table.public-rt.id
+  subnet_id      = aws_subnet.public-subnet[count.index].id
+
+  depends_on = [aws_vpc.vpc,
+    aws_subnet.public-subnet
+  ]
+}
+
+resource "aws_eip" "ngw-eip" {
+  domain = "vpc"
+
+  tags = {
+    Name = var.eip-name
+  }
+
+  depends_on = [aws_vpc.vpc
+  ]
+
+}
+
+
