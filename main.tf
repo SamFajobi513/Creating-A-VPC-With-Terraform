@@ -61,3 +61,26 @@ resource "aws_subnet" "private-subnet" {
   depends_on = [aws_vpc.vpc,
   ]
 }
+
+resource "aws_route_table" "public-rt" {
+  vpc_id = aws_vpc.vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igw.id
+  }
+
+  route {
+    ipv6_cidr_block        = "::/0"
+    egress_only_gateway_id = aws_egress_only_internet_gateway.igw.id
+  }
+
+  tags = {
+    Name = var.public-rt-name
+    env  = var.env
+  }
+
+  depends_on = [aws_vpc.vpc
+  ]
+}
+

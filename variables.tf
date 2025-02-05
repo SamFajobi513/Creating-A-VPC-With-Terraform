@@ -11,5 +11,5 @@ variable "pub-sub-name" {}
 variable "pri-subnet-count" {}
 variable "pri-availability-zone" {}
 variable "pri-sub-name" {}
-variable "pri-cidr-block" {}
+variable "public-rt-name" {}
 variable "pri-cidr-block" {}
