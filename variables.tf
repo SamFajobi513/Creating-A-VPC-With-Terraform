@@ -4,3 +4,9 @@ variable "cluster-name" {}
 variable "vpc-cidr" {}
 variable "vpc-name" {}
 variable "igw-name" {}
+variable "pub-subnet-count" {}
+variable "pub-cidr-block" {}
+variable "pub-availability-zone" {}
+variable "pub-sub-name" {}
+variable "pub-availability-zone" {}
+variable "pub-availability-zone" {}
