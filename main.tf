@@ -152,4 +152,13 @@ resource "aws_route_table" "private-rt" {
   ]
 }
 
+resource "aws_route_table_association" "name" {
+  count          = 3
+  route_table_id = aws_route_table.private-rt.id
+  subnet_id      = aws_subnet.private-subnet[count.index].id
+
+  depends_on = [aws_vpc.vpc,
+    aws_subnet.private-subnet
+  ]
+}
 
