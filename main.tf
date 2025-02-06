@@ -130,4 +130,26 @@ resource "aws_nat_gateway" "ngw" {
   ]
 }
 
+resource "aws_route_table" "private-rt" {
+  vpc_id = aws_vpc.vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.ngw.id
+  }
+
+  route {
+    ipv6_cidr_block        = "::/0"
+    egress_only_gateway_id = aws_egress_only_internet_gateway.eoigw.id
+  }
+
+  tags = {
+    Name = var.private-rt-name
+    env  = var.env
+  }
+
+  depends_on = [aws_vpc.vpc
+  ]
+}
+
 
