@@ -14,3 +14,4 @@ variable "pri-sub-name" {}
 variable "public-rt-name" {}
 variable "pri-cidr-block" {}
 variable "eoigw" {}
+variable "eip-name" {}

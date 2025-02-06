@@ -117,4 +117,17 @@ resource "aws_eip" "ngw-eip" {
 
 }
 
+resource "aws_nat_gateway" "ngw" {
+  allocation_id = aws_eip.ngw-eip.id
+  subnet_id     = aws_subnet.public-subnet[0].id
+
+  tags = {
+    Name = var.ngw-name
+  }
+
+  depends_on = [aws_vpc.vpc,
+    aws_eip.ngw-eip
+  ]
+}
+
 
